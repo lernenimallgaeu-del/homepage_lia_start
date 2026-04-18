@@ -1,0 +1,537 @@
+<!-- ═══════════════════════════════════════════════
+     LiA – Bewertungen Karussell
+     Einbinden als HTML-Content-Element in TYPO3
+     Platzierung: nach dem Firmenlogo-Block
+═══════════════════════════════════════════════ -->
+<style>
+ .lia-reviews {
+  font-family: 'Ubuntu', sans-serif;
+  padding: 3rem 0;
+  max-width: 900px;
+  margin: 0 auto;
+}
+.lia-reviews-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+.lia-reviews-header h2 {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #22223a;
+  margin-bottom: 0.4rem;
+}
+.lia-reviews-header h2 strong { font-weight: 700; }
+.lia-reviews-header p {
+  font-size: 0.88rem;
+  color: #5a5870;
+}
+
+/* Karussell */
+.lia-carousel {
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 1.25rem;
+}
+.lia-carousel-track {
+  display: flex;
+  transition: transform 0.5s ease;
+}
+.lia-review-card {
+  min-width: calc(50% - 0.65rem);
+  max-width: calc(50% - 0.65rem);
+  margin-right: 1.25rem;
+  background: #f9f8f5;
+  border: 1px solid rgba(34,34,58,0.1);
+  border-radius: 14px;
+  padding: 1.5rem;
+  box-sizing: border-box;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+.lia-review-stars {
+  color: #f4b400;
+  font-size: 0.9rem;
+  letter-spacing: 2px;
+  margin-bottom: 0.6rem;
+}
+.lia-review-text {
+  font-size: 0.87rem;
+  color: #333352;
+  line-height: 1.7;
+  margin-bottom: 1rem;
+  font-style: italic;
+  white-space: normal;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+.lia-review-author {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+.lia-review-initial {
+  width: 34px; height: 34px;
+  border-radius: 50%;
+  background: #22223a;
+  color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.75rem; font-weight: 700;
+  flex-shrink: 0;
+}
+.lia-review-name {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #22223a;
+}
+.lia-review-source {
+  font-size: 0.7rem;
+  color: #888;
+  margin-top: 1px;
+}
+
+/* Navigation */
+.lia-carousel-nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.75rem;
+}
+.lia-carousel-btn {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  border: 1px solid rgba(34,34,58,0.18);
+  background: transparent;
+  cursor: pointer;
+  font-size: 1rem;
+  color: #22223a;
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.2s, border-color 0.2s;
+  font-family: 'Ubuntu', sans-serif;
+}
+.lia-carousel-btn:hover {
+  background: #22223a;
+  color: #fff;
+  border-color: #22223a;
+}
+.lia-carousel-dots {
+  display: flex;
+  gap: 6px;
+}
+.lia-dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: rgba(34,34,58,0.15);
+  cursor: pointer;
+  transition: background 0.2s;
+  border: none;
+  padding: 0;
+}
+.lia-dot.active { background: #77b33c; }
+
+/* Links */
+.lia-reviews-links {
+  text-align: center;
+  padding-top: 1rem;
+}
+.lia-reviews-links p {
+  font-size: 0.82rem;
+  color: #888;
+  margin-bottom: 0.85rem;
+}
+.lia-reviews-links-row {
+  display: flex;
+  gap: 0.65rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.lia-review-btn {
+  display: inline-block;
+  text-decoration: none;
+  font-size: 0.78rem;
+  color: #5a5870;
+  padding: 0.35rem 0.9rem;
+  border-radius: 50px;
+  border: 1px solid rgba(34,34,58,0.18);
+  transition: border-color 0.2s, color 0.2s;
+  font-family: 'Ubuntu', sans-serif;
+}
+.lia-review-btn:hover {
+  border-color: #77b33c;
+  color: #22223a;
+}
+
+@media (max-width: 640px) {
+  .lia-review-card {
+    min-width: calc(100% - 1.25rem);
+    max-width: calc(100% - 1.25rem);
+  }
+}
+</style>
+<div class="lia-reviews">
+ <div class="lia-reviews-header">
+  <h2>
+   <strong>What my students say</strong>
+  </h2>
+  <p>
+   Real reviews - from Google, Trustpilot and my guestbook
+  </p>
+ </div>
+ <div class="lia-carousel">
+  <div class="lia-carousel-track" id="liaTrack">
+   <div class="lia-review-card">
+    <div class="lia-review-stars">
+     ★★★★★
+    </div>
+    <div class="lia-review-text">
+     "Eva is an excellent teacher. She is professional, helpful and knowledgeable.
+     I have taken German classes from others - Eva is the best.
+     Highly recommended!"
+    </div>
+    <div class="lia-review-author">
+     <div class="lia-review-initial">
+      JP
+     </div>
+     <div>
+      <div class="lia-review-name">
+       Jennifer Pelzer
+      </div>
+      <div class="lia-review-source">
+       LiA Guestbook
+      </div>
+     </div>
+    </div>
+   </div>
+   <div class="lia-review-card">
+    <div class="lia-review-stars">
+     ★★★★★
+    </div>
+    <div class="lia-review-text">
+     "As someone with no prior knowledge, I can say: the course is extremely
+     effective. The most important factor, however, is the teacher - Eva-Maria
+     is incredibly friendly and has a rare ability to build genuine connections."
+    </div>
+    <div class="lia-review-author">
+     <div class="lia-review-initial">
+      VM
+     </div>
+     <div>
+      <div class="lia-review-name">
+       Velik Mangushev
+      </div>
+      <div class="lia-review-source">
+       Trustpilot
+      </div>
+     </div>
+    </div>
+   </div>
+   <div class="lia-review-card">
+    <div class="lia-review-stars">
+     ★★★★★
+    </div>
+    <div class="lia-review-text">
+     "Eva is a great teacher! Thanks to her I improved my German and passed
+     the Telc exam. Her lessons are fun, well-organised and she always
+     has patience."
+    </div>
+    <div class="lia-review-author">
+     <div class="lia-review-initial">
+      AH
+     </div>
+     <div>
+      <div class="lia-review-name">
+       Antonio Herrera
+      </div>
+      <div class="lia-review-source">
+       Google
+      </div>
+     </div>
+    </div>
+   </div>
+   <div class="lia-review-card">
+    <div class="lia-review-stars">
+     ★★★★★
+    </div>
+    <div class="lia-review-text">
+     "Many thanks for the entertaining and well-prepared German lessons.
+     With patience, various texts and lots of laughter we spent almost
+     a year together."
+    </div>
+    <div class="lia-review-author">
+     <div class="lia-review-initial">
+      SK
+     </div>
+     <div>
+      <div class="lia-review-name">
+       Stavros K.
+      </div>
+      <div class="lia-review-source">
+       Google
+      </div>
+     </div>
+    </div>
+   </div>
+   <div class="lia-review-card">
+    <div class="lia-review-stars">
+     ★★★★★
+    </div>
+    <div class="lia-review-text">
+     "Although we only spent just under a year together, it truly improved
+     my German! Thank you for your patience and the wonderful lessons.
+     Learning German at LiA - highly recommended! Greetings from Brazil."
+    </div>
+    <div class="lia-review-author">
+     <div class="lia-review-initial">
+      DG
+     </div>
+     <div>
+      <div class="lia-review-name">
+       Douglas Della Gracia
+      </div>
+      <div class="lia-review-source">
+       Google
+      </div>
+     </div>
+    </div>
+   </div>
+   <div class="lia-review-card">
+    <div class="lia-review-stars">
+     ★★★★★
+    </div>
+    <div class="lia-review-text">
+     "I recommend Eva for German lessons! She is very patient and made
+     everything stress-free. There was even laughter! As a beginner,
+     Eva helped me so much - her activities with LiA students are wonderful."
+    </div>
+    <div class="lia-review-author">
+     <div class="lia-review-initial">
+      D
+     </div>
+     <div>
+      <div class="lia-review-name">
+       Dan
+      </div>
+      <div class="lia-review-source">
+       Google
+      </div>
+     </div>
+    </div>
+   </div>
+   <div class="lia-review-card">
+    <div class="lia-review-stars">
+     ★★★★★
+    </div>
+    <div class="lia-review-text">
+     "The best language courses for individuals and companies! Flexible hours,
+     online or in-person classes, and lessons that adapt to your preferred
+     learning style. Cannot recommend enough!"
+    </div>
+    <div class="lia-review-author">
+     <div class="lia-review-initial">
+      JW
+     </div>
+     <div>
+      <div class="lia-review-name">
+       Jon Williams
+      </div>
+      <div class="lia-review-source">
+       Google
+      </div>
+     </div>
+    </div>
+   </div>
+   <div class="lia-review-card">
+    <div class="lia-review-stars">
+     ★★★★★
+    </div>
+    <div class="lia-review-text">
+     "Friendly teacher who knows how to motivate. Thumbs up!"
+    </div>
+    <div class="lia-review-author">
+     <div class="lia-review-initial">
+      CM
+     </div>
+     <div>
+      <div class="lia-review-name">
+       Christina Mueller
+      </div>
+      <div class="lia-review-source">
+       Google
+      </div>
+     </div>
+    </div>
+   </div>
+   <div class="lia-review-card">
+    <div class="lia-review-stars">
+     ★★★★★
+    </div>
+    <div class="lia-review-text">
+     "A great, individually designed language course for employees.
+     Communication has always been excellent. Happy to recommend!"
+    </div>
+    <div class="lia-review-author">
+     <div class="lia-review-initial">
+      HH
+     </div>
+     <div>
+      <div class="lia-review-name">
+       Hiedl Heidekulturen
+      </div>
+      <div class="lia-review-source">
+       Google
+      </div>
+     </div>
+    </div>
+   </div>
+   <div class="lia-review-card">
+    <div class="lia-review-stars">
+     ★★★★★
+    </div>
+    <div class="lia-review-text">
+     "I would like to thank Eva for the very well-organised and lively
+     English sessions in my company. The participants have lost their
+     inhibitions and are actively engaging in the English training."
+    </div>
+    <div class="lia-review-author">
+     <div class="lia-review-initial">
+      WB
+     </div>
+     <div>
+      <div class="lia-review-name">
+       Werner Berlage, HR Manager
+      </div>
+      <div class="lia-review-source">
+       LiA Guestbook
+      </div>
+     </div>
+    </div>
+   </div>
+   <div class="lia-review-card">
+    <div class="lia-review-stars">
+     ★★★★★
+    </div>
+    <div class="lia-review-text">
+     "With you I learned a lot of German in a short time - not just the
+     language, but also the culture. The atmosphere was always very relaxed.
+     Through LiA I even made some lifelong friends!"
+    </div>
+    <div class="lia-review-author">
+     <div class="lia-review-initial">
+      HT
+     </div>
+     <div>
+      <div class="lia-review-name">
+       Hannah Tankard
+      </div>
+      <div class="lia-review-source">
+       LiA Guestbook
+      </div>
+     </div>
+    </div>
+   </div>
+
+   <div class="lia-review-card">
+    <div class="lia-review-stars">★★★★★</div>
+    <div class="lia-review-text">
+     "Eva was a wonderful teacher! She expanded both my language skills
+     and my cultural knowledge. Many thanks for the great lessons, Eva!"
+    </div>
+    <div class="lia-review-author">
+     <div class="lia-review-initial">WW</div>
+     <div>
+      <div class="lia-review-name">Wolfgang Wirth</div>
+      <div class="lia-review-source">LiA Guestbook</div>
+     </div>
+    </div>
+   </div>
+
+  </div>
+ </div>
+ <div class="lia-carousel-nav">
+  <button class="lia-carousel-btn" id="liaPrev">
+   ←
+  </button>
+  <div class="lia-carousel-dots" id="liaDots">
+  </div>
+  <button class="lia-carousel-btn" id="liaNext">
+   →
+  </button>
+ </div>
+ <div class="lia-reviews-links">
+  <p>
+   Read all reviews
+  </p>
+  <div class="lia-reviews-links-row">
+   <a class="lia-review-btn" href="https://www.google.com/maps/place/Lernen+im+Allg%C3%A4u/@47.7948548,10.2715644,17z/data=!3m2!4b1!5s0x479b881e6bc0b5af:0x1bf368b976ab5659!4m6!3m5!1s0x479b881e6bb7afe3:0x5ed7f40f70519673!8m2!3d47.7948512!4d10.2741447!16s%2Fg%2F11bz07ftm_?entry=ttu&amp;g_ep=EgoyMDI2MDQxNS4wIKXMDSoASAFQAw%3D%3D" rel="noopener" target="_blank">
+    ★ Google Reviews
+   </a>
+   <a class="lia-review-btn" href="https://www.trustpilot.com/review/lernen-im-allgaeu.de" rel="noopener" target="_blank">
+    ★ Trustpilot
+   </a>
+   <a class="lia-review-btn" href="https://www.lernen-im-allgaeu.de/kontakt-gaestebuch/gaestebuch.html">
+    ★ Guestbook (since 2010)
+   </a>
+  </div>
+ </div>
+</div>
+<script>
+ (function() {
+  var track = document.getElementById('liaTrack');
+  var dotsContainer = document.getElementById('liaDots');
+  var cards = track.querySelectorAll('.lia-review-card');
+  var total = cards.length;
+  var current = 0;
+  var visibleCount = 3;
+  var autoInterval;
+
+  function getVisible() {
+    if (window.innerWidth <= 640) return 1;
+    return 2;
+  }
+
+  function totalSlides() {
+    return Math.ceil(total / getVisible());
+  }
+
+  function buildDots() {
+    dotsContainer.innerHTML = '';
+    var n = totalSlides();
+    for (var i = 0; i < n; i++) {
+      var d = document.createElement('button');
+      d.className = 'lia-dot' + (i === current ? ' active' : '');
+      d.setAttribute('data-i', i);
+      d.addEventListener('click', function() { goTo(parseInt(this.getAttribute('data-i'))); });
+      dotsContainer.appendChild(d);
+    }
+  }
+
+  function goTo(idx) {
+    var n = totalSlides();
+    current = (idx + n) % n;
+    var vis = getVisible();
+    var cardWidth = cards[0].offsetWidth + 20;
+    track.style.transform = 'translateX(-' + (current * vis * cardWidth) + 'px)';
+    buildDots();
+  }
+
+  function next() { goTo(current + 1); }
+  function prev() { goTo(current - 1); }
+
+  document.getElementById('liaNext').addEventListener('click', function() { next(); resetAuto(); });
+  document.getElementById('liaPrev').addEventListener('click', function() { prev(); resetAuto(); });
+
+  function startAuto() {
+    autoInterval = setInterval(next, 4000);
+  }
+  function resetAuto() {
+    clearInterval(autoInterval);
+    startAuto();
+  }
+
+  window.addEventListener('resize', function() { goTo(0); });
+
+  buildDots();
+  goTo(0);
+  startAuto();
+})();
+</script>
